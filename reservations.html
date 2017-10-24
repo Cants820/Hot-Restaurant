@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reservations</title>
+</head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<body>
+
+<div class="container">
+  <div class="jumbotron title">
+      <h1>Hot New Restaurant</h1><br>
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-danger">Tables</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary">Home</button>
+          </div>
+        </div>
+  </div><br>
+
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Reservation Information</h3>
+  </div>
+  <div class="panel-body">
+
+
+
+<form role="form">
+  <div class="input-group col-sm-12">
+    <label for="sel1">Reservation Name:</label>
+    <input type="text" class="form-control" id="name"><br>
+  </div><br>
+
+  <div class="input-group col-sm-12">
+    <label for="sel1">Phone Number:</label>
+    <input type="text" class="form-control" id="phoneNumber"><br>
+  </div><br>
+
+  <div class="input-group col-sm-12">
+    <label for="sel1">Email:</label>
+    <input type="text" class="form-control" id="email"><br>
+  </div><br>
+
+  <div class="input-group col-sm-12">
+    <label for="sel1">Unique ID:</label>
+    <input type="text" class="form-control" id="uid"><br>
+  </div><br>
+</form>
+
+
+<!--  -->
+
+<!--  -->
+
+<!-- Buttons Start-->
+  <div class="row">
+    <div>
+      <div class = "col-sm-6">
+        <span class="input-group-btn">
+          <button id="searchButton" class="btn btn-default" type="submit-button">Search</button>
+        </span>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Buttons end -->
+
+
+</div> 
+</div>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    // Question: What does this code do?
+    $("#submit-button").on("click", function(event) {
+      event.preventDefault();
+
+      var newReservation = {
+        name: $("#name").val().trim(),
+        role: $("#phoneNumber").val().trim(),
+        age: $("#email").val().trim(),
+        forcePoints: $("#uid").val().trim()
+      };
+
+      // Question: What does this code do??
+      $.post("/api/new", newReservation)
+      .done(function(data) { //whats with the dot? express?
+        console.log(data);
+        alert("Adding reservation...");
+      });
+
+    });
+  </script>
+
+
+
+</div>
+
+</body>
