@@ -7,7 +7,7 @@ var path = require("path");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = 2343;
+var PORT = 3000;
 
 //setting up arrays for reservations and waiting list
 // =============================================================
@@ -32,11 +32,14 @@ app.get("/", function(req, res) {
  res.send("welcome to hot restaurants")
 });
 
-app.get("/reservations", function(req,res){
+app.get("/tables", function(req,res){
   res.json(reservations[0]);
 })
-
+app.get("/reserve",function(req,res){
+  res.json(reservations[0]);
+})
 
 app.listen(PORT, function() {
   console.log("We are listening to Port: " + PORT);
 });
+
