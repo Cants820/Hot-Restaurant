@@ -20,7 +20,15 @@ var reservations = [
     uniqueId:1
   }
 ];
-var waitingList = [];
+var waitingList = [
+   {
+    routeName:"reservation2",
+    name:"Sai",
+    phoneNumber:"8082345511",
+    email:"Sai.scubadiver@gmail.com",
+    uniqueId:2
+  }
+];
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,15 +37,36 @@ app.use(bodyParser.json());
 //setting up routes
 // =============================================================
 app.get("/", function(req, res) {
- res.send("welcome to hot restaurants")
-});
+ res.sendFile(path.join(__dirname, "index.html"));  
 
+});
 app.get("/tables", function(req,res){
-  res.json(reservations[0]);
+  res.sendFile(path.join(__dirname, "tablesView.html"));
 })
 app.get("/reserve",function(req,res){
-  res.json(reservations[0]);
+  res.sendFile(path.join(__dirname,"reservations.html"));
 })
+app.get("/api/reservations", function (req,res){
+  res.json(reservations);
+})
+app.get("/api/waitingList", function (req,res){
+  res.json(waitingList);
+})
+app.post("api/clear",function(){
+  reservations = [];
+  waitingList = [];
+})
+app.post("/api/reservations", function(req,res){
+  if(reservations.length < 5){
+    reservations.push(req.body);
+    res.json(true);
+  } else {
+    reservations.push(req.body);
+    res.json(false);
+  } 
+
+})
+
 
 app.listen(PORT, function() {
   console.log("We are listening to Port: " + PORT);
